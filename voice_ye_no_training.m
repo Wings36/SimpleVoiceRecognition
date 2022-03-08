@@ -4,13 +4,18 @@ windowSize = 1024;
 numOfWindows = samples / windowSize;
 numOfWindows = floor(numOfWindows);
 samplePointer = 1;
+% PSD = 20*log10(abs()); %PSD function
 
-test = mat2cell(samples, windowSize);
 
+for x = 1:1
+    windowSelect = samples(samplePointer:windowSize);
+    windowFFT = fftshift(fft(windowSelect));
+    magWindow = abs(windowFFT);
 
-% for x = 1:numOfWindows
-%     
-%     
-% 
-% 
-% end
+    %Converted to dB
+    magWindow = 20 * log10(abs(magWindow));
+
+    %discard bins corresponding to negative frequency components
+    
+end
+
