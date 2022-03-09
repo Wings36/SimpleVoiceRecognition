@@ -5,7 +5,8 @@ numOfWindows = size(samples) / windowSize;
 numOfWindows = floor(numOfWindows);
 numOfWindows = numOfWindows(1,1);
 samplePointer = 1;
-% PSD = 20*log10(abs()); %PSD function
+resultPSD = zeros(windowSize/2, 1);
+
 
 
 for x = 1:numOfWindows
@@ -18,9 +19,13 @@ for x = 1:numOfWindows
     
     %discard bins corresponding to negative frequency components
     magWindow = magWindow(1:512);
-    figure();
-    plot(magWindow);
+    resultPSD = resultPSD + magWindow;
+
+    %Advance pointer
     samplePointer = samplePointer + windowSize;
-    
+%   figure();
+%   plot(magWindow);
 end
 
+resultPSD = resultPSD ./ numOfWindows;
+plot(resultPSD);
