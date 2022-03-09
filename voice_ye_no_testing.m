@@ -1,6 +1,6 @@
 % clear all;clc;close all; 
-function result = voice_recognition(x, Fs)
-%threshold = ?; threshold has to be determined based on lo/hi ratio
+function result = voice_ye_no_testing(x, Fs)
+threshold = 12;
 
 N = length(x);
 low = round(N*4000/Fs);
