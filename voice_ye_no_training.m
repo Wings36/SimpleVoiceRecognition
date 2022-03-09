@@ -19,7 +19,7 @@ for x = 1:numOfWindows
     magWindow = 20 * log10(abs(magWindow));
     
     %discard bins corresponding to negative frequency components
-    magWindow = magWindow(1:512);
+    magWindow = magWindow(1:windowSize/2);
     resultPSD = resultPSD + magWindow;
 
     %Advance pointer
@@ -29,3 +29,6 @@ for x = 1:numOfWindows
 end
 resultPSD = resultPSD ./ numOfWindows;
 plot(ffshift, resultPSD);
+
+lowFeature = resultPSD(0:windowSize/4);
+highFeature = resultPSD(windowSize/4:windowSize/2);
