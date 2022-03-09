@@ -29,7 +29,8 @@ windowSize = 1024;
 %     plot(ffshift, resultPSD);
     
     lowFeature = resultPSD(1:windowSize/4);
-    lowFeature = sum(abs(lowFeature));
     highFeature = resultPSD((windowSize/4)+1:windowSize/2);
+    lowFeature = sum(abs(lowFeature));
+    
     highFeature = sum(abs(highFeature));
-    result = lowFeature / highFeature;
+    result = highFeature / lowFeature;
