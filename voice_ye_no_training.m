@@ -33,5 +33,5 @@ function result = voice_ye_no_training(audioString)
     lowFeature = sum(lowFeature);
     highFeature = resultPSD(windowSize/4:windowSize/2);
     highFeature = sum(highFeature);
-    result = lowFeature / highFeature;
+    result = abs(lowFeature / highFeature);
 end
