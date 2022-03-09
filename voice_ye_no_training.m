@@ -9,14 +9,18 @@ samplePointer = 1;
 
 
 for x = 1:numOfWindows
-    windowSelect = samples(samplePointer:windowSize);
+    windowSelect = samples(samplePointer:samplePointer + windowSize - 1);
     windowFFT = fftshift(fft(windowSelect));
-    magWindow = abs(windowFFT);
+    magWindow = abs(windowFFT).^ 2;
 
     %Converted to dB
     magWindow = 20 * log10(abs(magWindow));
     
     %discard bins corresponding to negative frequency components
+    magWindow = magWindow(1:512);
+    figure();
+    plot(magWindow);
+    samplePointer = samplePointer + windowSize;
     
 end
 
