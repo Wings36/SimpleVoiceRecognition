@@ -14,13 +14,15 @@ function result = voice_ye_no_training(audioString)
      for x = 1:numOfWindows
         windowSelect = samples(samplePointer: samplePointer + N - 1);
         windowFFT = abs(fft(windowSelect));
-        
+
         fftTotal = fftTotal + windowFFT;
         
-%         for j=1:N %(5)
-%             if (windowFFT(j)==0) posWindow(j)=-60;
-%             else, posWindow(j) = 20*log10(windowFFT(j)); end
-%         end
+        for j=1:N %(5)
+            if (windowFFT(j)==0) posWindow(j)=-60;
+            else, posWindow(j) = 20*log10(windowFFT(j)); end
+        end
+
+        fftTotal = fftTotal + posWindow;
 
 %         posWindow = fftshift(posWindow); %(6)
 %         posWindow = posWindow(N/2+1:N);
@@ -31,4 +33,6 @@ function result = voice_ye_no_training(audioString)
     aveDFT = windowFFT/numOfWindows; %(8)
 
     result = sum(aveDFT(1:low))/sum(aveDFT(low:high));
+
+
 
