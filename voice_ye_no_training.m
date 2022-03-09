@@ -9,7 +9,6 @@ function result = voice_ye_no_training(audioString)
     ffshift = ((0:windowSize/2-1)*sampleRate/windowSize);
     ffshift = rot90(ffshift);
     
-    
     for x = 1:numOfWindows
         windowSelect = samples(samplePointer:samplePointer + windowSize - 1);
         windowFFT = fftshift(fft(windowSelect));
