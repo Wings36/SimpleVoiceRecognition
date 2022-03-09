@@ -22,11 +22,10 @@ function result = voice_ye_no_training(audioString)
             else, posWindow(j) = 20*log10(windowFFT(j)); end
         end
 
+        posWindow = posWindow(1:high);
         fftTotal = fftTotal + posWindow;
 
-%         posWindow = fftshift(posWindow); %(6)
-%         posWindow = posWindow(N/2+1:N);
-
+        
         samplePointer = samplePointer + N;        
       end %(7)
 
