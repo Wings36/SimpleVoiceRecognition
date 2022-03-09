@@ -9,7 +9,7 @@ high = round(N*8000/Fs);
 shiftx = abs(fft(x));
 feature = sum(shiftx(1:low))/sum(shiftx(low:high));
 
-if featrue < threshold
+if feature < threshold
     result = 'yes';
 else
     result = 'no';
