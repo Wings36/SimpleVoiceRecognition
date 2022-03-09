@@ -30,5 +30,8 @@ end
 resultPSD = resultPSD ./ numOfWindows;
 plot(ffshift, resultPSD);
 
-lowFeature = resultPSD(0:windowSize/4);
+lowFeature = resultPSD(1:windowSize/4);
+lowFeature = sum(lowFeature);
 highFeature = resultPSD(windowSize/4:windowSize/2);
+highFeature = sum(highFeature);
+result = lowFeature / highFeature;
