@@ -1,36 +1,19 @@
 function result = voice_ye_no_training(audioString)  
-    [samples,sampleRate] = audioread(audioString);
-windowSize = 1024;
-    numOfWindows = size(samples) / windowSize;
-    numOfWindows = floor(numOfWindows);
-    numOfWindows = numOfWindows(1,1);
-    samplePointer = 1;
-    resultPSD = zeros(windowSize/2, 1);
-    ffshift = ((0:windowSize/2-1)*sampleRate/windowSize);
-    ffshift = rot90(ffshift);
-    
-   for x = 1:numOfWindows
-        windowSelect = samples(samplePointer:samplePointer + windowSize - 1);
+   [samples,sampleRate] = audioread(audioString); %(1)
+   N =1024;%(2)
+   numOfWindows = length(samples) / N; %(3)
+   numOfWindows = floor(numOfWindows);
+   samplePointer = 1;
+   result = zeros(N/2,1);
 
-        windowSize = length(windowSelect);
-        windowFFT = fft(windowSelect);
-        windowFFT = windowFFT(1:windowSize/2);
-        magWindow = (1/(sampleRate*windowSize)) * abs(windowFFT) .^ 2;
-        magWindow(2:end-1) = 2 * magWindow(2:end-1);
-        magWindow = 10 * log10(magWindow);
-        resultPSD = resultPSD + magWindow;
+
+    N = length(samples);
+    Fs = sampleRate;
+    low = round(N*4000/Fs);
+    high = round(N*8000/Fs);
     
-        %Advance pointer
-        samplePointer = samplePointer + windowSize;
-%         figure();
-%         plot(ffshift,magWindow);
-    end
-    resultPSD = resultPSD ./ numOfWindows;
-%     plot(ffshift, resultPSD);
+    shiftx = abs(fft(samples));
     
-    lowFeature = resultPSD(1:windowSize/4);
-    highFeature = resultPSD((windowSize/4)+1:windowSize/2);
-    lowFeature = sum(abs(lowFeature));
-    
-    highFeature = sum(abs(highFeature));
-    result = highFeature / lowFeature;
+
+    result = sum(shiftx(1:low))/sum(shiftx(low:high));
+
