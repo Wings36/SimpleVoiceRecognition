@@ -1,6 +1,6 @@
 % clear all;clc;close all; 
 function result = voice_ye_no_testing(x, Fs)
-%threshold = ?; threshold has to be determined based on lo/hi ratio
+threshold = 12;
 
 N = length(x);
 low = round(N*4000/Fs);
