@@ -6,14 +6,15 @@ numOfWindows = floor(numOfWindows);
 numOfWindows = numOfWindows(1,1);
 samplePointer = 1;
 resultPSD = zeros(windowSize/2, 1);
-
+ffshift = ((0:windowSize/2-1)*sampleRate/windowSize);
+ffshift = rot90(ffshift);
 
 
 for x = 1:numOfWindows
     windowSelect = samples(samplePointer:samplePointer + windowSize - 1);
     windowFFT = fftshift(fft(windowSelect));
-    magWindow = abs(windowFFT).^ 2;
-
+    magWindow = abs(windowFFT) .^ 2;
+    magWindow = magWindow + 0.001;
     %Converted to dB
     magWindow = 20 * log10(abs(magWindow));
     
@@ -23,9 +24,8 @@ for x = 1:numOfWindows
 
     %Advance pointer
     samplePointer = samplePointer + windowSize;
-%   figure();
-%   plot(magWindow);
+%     figure();
+%     plot(ffshift,magWindow);
 end
-
 resultPSD = resultPSD ./ numOfWindows;
-plot(resultPSD);
+plot(ffshift, resultPSD);
