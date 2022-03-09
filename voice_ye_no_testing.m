@@ -1,6 +1,6 @@
 % clear all;clc;close all; 
 for i = 100:170
-    fileName = (strcat('test/no/',sprintf('%01d', i)));
+    fileName = (strcat('test/yes/',sprintf('%01d', i)));
     audioString = (fileName + ".wav")
     [x, Fs] = audioread(audioString);
     threshold = 12;
@@ -16,5 +16,6 @@ for i = 100:170
         result = 'yes';
     else
      result = 'no';
-    end 
+    end
+    disp(result);
 end
