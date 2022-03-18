@@ -1,3 +1,8 @@
+%Peter Hoang and Kyuwon Kim
+%EE241 Winter 2022, Voice Recognizer
+%voice_ye_no_training.m
+%voice_ye_no_training.m creates a histogram from a training bank of audio
+%clips's feature score
 clear all;clc;close all; 
 for i = 0:99
     fileName = (strcat('train/no/',sprintf('%01d', i)));

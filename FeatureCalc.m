@@ -1,3 +1,8 @@
+%Peter Hoang and Kyuwon Kim
+%EE241 Winter 2022, Voice Recognizer
+%FeatureCalc.m
+%FeatureCalc.m calculates a feature score for the audio clip provided using
+%fft and Power Density spectral functions.
 function result = FeatureCalc(audioString)  
    [samples,sampleRate] = audioread(audioString); %(1)
    N =1024;%(2)

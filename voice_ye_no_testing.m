@@ -1,3 +1,8 @@
+%Peter Hoang and Kyuwon Kim
+%EE241 Winter 2022, Voice Recognizer
+%voice_ye_no_testing.m
+%voice_ye_no_testing.m uses a test bank of audio clips and tests whether
+%each clip is yes or no, and the accuracy of the voice recognizer.
 clear all;clc;close all; 
 total = 0;
 correctYes = 0;
